@@ -1,0 +1,12 @@
+[Unit]
+Description=Leakie
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/production/Leakie
+ExecStart=/home/pi/production/Leakie/venv/bin/python src/bot.py "/etc/Leakie/config.toml"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

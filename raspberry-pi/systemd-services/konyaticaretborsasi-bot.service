@@ -1,0 +1,12 @@
+[Unit]
+Description=Konya Ticaret Borsasi Telegram Bot
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/production/konyaticaretborsasi-bot
+ExecStart=/home/pi/production/konyaticaretborsasi-bot/venv/bin/python -m src "/etc/konyaticaretborsasi-bot/config.toml"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

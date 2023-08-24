@@ -1,0 +1,12 @@
+[Unit]
+Description=PseudoContact
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/production/pseudocontact
+ExecStart=/home/pi/production/pseudocontact/venv/bin/python -m src "/etc/pseudocontact/config.toml"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
