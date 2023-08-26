@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+
+import smtplib
+import subprocess
+import sys
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+import toml
+
+config_path = sys.argv[1] if len(sys.argv) > 1 else 'config.toml'
+config = toml.load(config_path)
+
+IP_ADDR = subprocess.getoutput("hostname -I")
+
+# Email configuration
+sender_email = config["SENDER_EMAIL"]
+receiver_email = config["RECEIVER_EMAIL"]
+subject = "My New Local IP Address"
+message = (f"My IP address have changed to: {IP_ADDR}")
+
+# Create a MIME message
+msg = MIMEMultipart()
+msg['From'] = sender_email
+msg['To'] = receiver_email
+msg['Subject'] = subject
+msg.attach(MIMEText(message, 'plain'))
+
+# Gmail SMTP server configuration
+smtp_server = "smtp.gmail.com"
+smtp_port = 587
+smtp_username = config["SMTP_USERNAME"]
+smtp_password = config["SMTP_PASSWORD"]
+
+
+server = smtplib.SMTP(smtp_server, smtp_port)
+server.starttls()
+server.login(smtp_username, smtp_password)
+server.sendmail(sender_email, receiver_email, msg.as_string())
+server.quit()
+
+print("Email sent successfully!")

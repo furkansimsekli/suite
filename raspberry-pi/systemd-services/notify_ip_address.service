@@ -1,0 +1,13 @@
+[Unit]
+Description=Notify current local IP address via Email
+After=network-online.target
+StartLimitInterval=10  
+StartLimitBurst=10
+
+[Service]
+Type=oneshot
+ExecStart=/home/pi/.local/bin/notify_ip_address "/etc/notify_ip_address.toml"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
