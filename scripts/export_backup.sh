@@ -36,6 +36,12 @@ gnome-extensions list > gnome_extensions.txt
 FILES_TO_BACKUP+=("/home/$USER/gnome_extensions.txt")
 echo "Gnome extension list have been exported"
 
+echo "Exporting saved networks from NetworkManager..."
+sudo cp -r /run/NetworkManager/system-connections ./
+sudo chown -R $USER system-connections
+FILES_TO_BACKUP+=("/home/$USER/system-connections")
+echo "Saved networks have been exported"
+
 CURRENT_DATE=$(date +"%Y-%m-%d")
 HOSTNAME=$(hostname)
 BACKUP_FILE="${CURRENT_DATE}-${HOSTNAME}.tar.gz"
