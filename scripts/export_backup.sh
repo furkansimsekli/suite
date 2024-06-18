@@ -3,7 +3,7 @@
 set -e
 
 DEFAULT_DESTINATION="/media/$USER/ADMIN/backup"
-DEFAULT_FILES_TO_BACKUP=("/home/$USER/.ssh" "/home/$USER/.config" "/home/$USER/Documents" "/home/$USER/Pictures")
+DEFAULT_FILES_TO_BACKUP=("/home/$USER/.ssh" "/home/$USER/.config" "/home/$USER/Documents" "/home/$USER/Pictures" "/home/$USER/.zsh_history")
 
 echo "Default destination: $DEFAULT_DESTINATION"
 read -p "Use default destination? (y/n) [y]: " use_default
@@ -30,6 +30,11 @@ echo "Exporting flatpak app list..."
 flatpak list --app --columns=app > flatpaks.txt
 FILES_TO_BACKUP+=("/home/$USER/flatpaks.txt")
 echo "Flatpak app list have been exported"
+
+echo "Exporting gnome extension list..."
+gnome-extensions list > gnome_extensions.txt
+FILES_TO_BACKUP+=("/home/$USER/gnome_extensions.txt")
+echo "Gnome extension list have been exported"
 
 CURRENT_DATE=$(date +"%Y-%m-%d")
 HOSTNAME=$(hostname)
