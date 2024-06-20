@@ -26,7 +26,7 @@ echo -e "${BROWN}Changing to the production directory...${NC}"
 cd production
 
 echo -e "${BROWN}Deleting the old project files...${NC}"
-rm -rf konyaticaretborsasi-bot
+rm -rf konyaticaretborsasi-bot *.tar.gz
 
 LATEST_VERSION=$(curl -s "https://api.github.com/repos/furkansimsekli/konyaticaretborsasi-bot/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
 echo -e "${GREEN}Latest version found: ${LATEST_VERSION}${NC}"

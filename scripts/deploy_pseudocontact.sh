@@ -23,7 +23,7 @@ echo -e "${BROWN}Changing to the production directory...${NC}"
 cd production
 
 echo -e "${BROWN}Deleting the old project folder...${NC}"
-rm -rf pseudocontact
+rm -rf pseudocontact *.tar.gz
 
 LATEST_VERSION=$(curl -s "https://api.github.com/repos/furkansimsekli/pseudocontact/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
 echo -e "${GREEN}Latest version found: ${LATEST_VERSION}${NC}"
