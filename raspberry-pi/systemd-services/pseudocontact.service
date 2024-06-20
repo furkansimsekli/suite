@@ -3,9 +3,9 @@ Description=PseudoContact
 After=network.target
 
 [Service]
-User=pi
-WorkingDirectory=/home/pi/production/pseudocontact
-ExecStart=/home/pi/production/pseudocontact/venv/bin/python -m src "/etc/pseudocontact/config.toml"
+User=f1nch
+WorkingDirectory=/home/f1nch/production/pseudocontact
+ExecStart=/home/f1nch/production/pseudocontact/venv/bin/python -m src "/home/f1nch/.config/pseudocontact.toml"
 Restart=always
 
 [Install]

@@ -3,9 +3,9 @@ Description=Leakie
 After=network.target
 
 [Service]
-User=pi
-WorkingDirectory=/home/pi/production/Leakie
-ExecStart=/home/pi/production/Leakie/venv/bin/python src/bot.py "/etc/Leakie/config.toml"
+User=f1nch
+WorkingDirectory=/home/f1nch/production/Leakie
+ExecStart=/home/f1nch/production/Leakie/venv/bin/python src/bot.py "/home/f1nch/.config/Leakie.toml"
 Restart=always
 
 [Install]

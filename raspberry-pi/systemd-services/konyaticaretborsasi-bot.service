@@ -3,9 +3,9 @@ Description=Konya Ticaret Borsasi Telegram Bot
 After=network.target
 
 [Service]
-User=pi
-WorkingDirectory=/home/pi/production/konyaticaretborsasi-bot
-ExecStart=/home/pi/production/konyaticaretborsasi-bot/venv/bin/python -m src "/etc/konyaticaretborsasi-bot/config.toml"
+User=f1nch
+WorkingDirectory=/home/f1nch/production/konyaticaretborsasi-bot
+ExecStart=/home/f1nch/production/konyaticaretborsasi-bot/venv/bin/python -m src "/home/f1nch/.config/konyaticaretborsasi-bot.toml"
 Restart=always
 
 [Install]
