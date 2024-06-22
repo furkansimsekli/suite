@@ -37,6 +37,9 @@ cd Leakie
 python -m venv venv && source venv/bin/activate && pip install -r requirements.txt && deactivate
 
 echo -e "${BROWN}Restarting the service...${NC}"
+# I don't know if there is a case where the system disables the service
+# itself, so I put this command just in case.
+sudo systemctl enable Leakie.service
 sudo systemctl restart Leakie.service
 
 echo -e "${BROWN}Cleaning the downloaded archive...${NC}"
