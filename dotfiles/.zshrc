@@ -24,7 +24,7 @@ ZSH_THEME="robbyrussell"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
+zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
@@ -77,8 +77,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
+if [ -d "$HOME/Workspace/suite/scripts" ] ; then
+    PATH="$HOME/Workspace/suite/scripts:$PATH"
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -93,37 +94,40 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Aliases
+# For a full list of active aliases, run `alias`
 alias devcs="ssh b2210356075@dev.cs.hacettepe.edu.tr"
-alias oytwork="cd ~/Documents/Workspace/OYT"
 alias work="cd ~/Documents/Workspace"
 alias tree="tree -I '__pycache__|venv|.venv|node_modules'"
 
-if [ -e /home/finch/.nix-profile/etc/profile.d/nix.sh ]; then . /home/finch/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# Added by Nix installer
+if [ -e /home/finch/.nix-profile/etc/profile.d/nix.sh ]; then . /home/finch/.nix-profile/etc/profile.d/nix.sh; fi
 
-hu-announcement-bot-deploy() {
-    ssh f1nch@oyt 'bash -s' < ~/.local/bin/deploy_hu-announcement-bot.sh
-}
+deploy() {
+    local project=$1
+    local hostname=$2
+    local port=${3:-22}
+    local user=${4:-f1nch}
 
-hu-cafeteria-bot-deploy() {
-    ssh f1nch@oyt 'bash -s' < ~/.local/bin/deploy_hu-cafeteria-bot.sh
-}
-
-pseudocontact-deploy() {
-    ssh pi@192.168.1.39 'bash -s' < ~/.local/bin/deploy_pseudocontact.sh
-}
-
-Leakie-deploy() {
-    ssh pi@192.168.1.39 'bash -s' < ~/.local/bin/deploy_Leakie.sh
-}
-
-konyaticaretborsasibot-deploy() {
-    ssh pi@192.168.1.39 'bash -s' < ~/.local/bin/deploy_konyaticaretborsasi-bot.sh
+    case $project in
+        hu-announcement-bot)
+            ssh -p $port $user@$hostname 'bash -s' < $HOME/Workspace/suite/scripts/deploy_hu-announcement-bot.sh
+            ;;
+        hu-cafeteria-bot)
+            ssh -p $port $user@$hostname 'bash -s' < $HOME/Workspace/suite/scripts/deploy_hu-cafeteria-bot.sh
+            ;;
+        pseudocontact)
+            ssh -p $port $user@$hostname 'bash -s' < $HOME/Workspace/suite/scripts/deploy_pseudocontact.sh
+            ;;
+        Leakie)
+            ssh -p $port $user@$hostname 'bash -s' < $HOME/Workspace/suite/scripts/deploy_Leakie.sh
+            ;;
+        konyaticaretborsasi-bot)
+            ssh -p $port $user@$hostname 'bash -s' < $HOME/Workspace/suite/scripts/deploy_konyaticaretborsasi-bot.sh
+            ;;
+        *)
+            echo "Unknown project: $project"
+            return 1
+            ;;
+    esac
 }
