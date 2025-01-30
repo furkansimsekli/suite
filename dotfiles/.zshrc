@@ -81,6 +81,13 @@ if [ -d "$HOME/Workspace/suite/scripts" ] ; then
     PATH="$HOME/Workspace/suite/scripts:$PATH"
 fi
 
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/dev/flutter/bin" ] ; then
+    PATH="$HOME/dev/flutter/bin:$PATH"
+fi
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -99,9 +106,6 @@ fi
 alias devcs="ssh b2210356075@dev.cs.hacettepe.edu.tr"
 alias work="cd ~/Documents/Workspace"
 alias tree="tree -I '__pycache__|venv|.venv|node_modules'"
-
-# Added by Nix installer
-if [ -e /home/finch/.nix-profile/etc/profile.d/nix.sh ]; then . /home/finch/.nix-profile/etc/profile.d/nix.sh; fi
 
 deploy() {
     local project=$1
